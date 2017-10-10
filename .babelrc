@@ -1,6 +1,10 @@
 {
   "presets": [
-    ["env", { "targets": { "browsers": ["last 2 versions"] } }],
+    ["env", { 
+      "targets": {"browsers": ["last 2 versions"]}},
+      "modules": false,
+      "debug": true,
+    ],
     "stage-0",
     "react",
   ],
@@ -8,5 +12,7 @@
     "react-hot-loader/babel",
     "transform-runtime",
     "transform-decorators-legacy",
+    "transform-es2015-modules-commonjs",
+    "transform-regenerator",
   ],
 }

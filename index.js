@@ -1,12 +1,8 @@
 
 // https://nodejs.org/dist/latest-v8.x/docs/api/globals.html
 // https://nodejs.org/dist/latest-v8.x/docs/api/modules.html
-
-// global objects are available in all modules
-// In browsers, the top-level scope is the global scope. 
-// This means that within the browser var something will define a new global variable. 
-// In Node.js this is different. The top-level scope is not the global scope; 
-// var something inside a Node.js module will be local to that module.
+// http://babeljs.io/docs/usage/babel-register/
+// https://github.com/istarkov/babel-plugin-webpack-loaders
 
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 // equal to your Webpack configuration "context" parameter
