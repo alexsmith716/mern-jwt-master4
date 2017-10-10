@@ -1,10 +1,6 @@
 
-// https://github.com/istarkov/babel-plugin-webpack-loaders
-// https://github.com/istarkov/minimal-example-for-babel-plugin-webpack-loaders/blob/master/webpack.config.js
-// https://webpack.js.org/loaders
-// https://github.com/webpack-contrib/css-loader
-// https://javascriptplayground.com/blog/2016/07/css-modules-webpack-react/
-// https://webpack.js.org/concepts/module-resolution/
+// All subsequent files required by node with the extensions .es6, .es, .jsx and .js will be transformed by Babel
+// https://github.com/thejameskyle/babel-handbook/blob/master/translations/en/user-handbook.md
 
 let cssModulesIdentName = '[name]__[local]__[hash:base64:5]';
 // defines structure of what generated CSS class should be, maps to generated output

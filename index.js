@@ -1,14 +1,13 @@
 
-// https://nodejs.org/dist/latest-v8.x/docs/api/globals.html
-// https://nodejs.org/dist/latest-v8.x/docs/api/modules.html
 // http://babeljs.io/docs/usage/babel-register/
-// https://github.com/istarkov/babel-plugin-webpack-loaders
+// babel-register: a require hook. binds itself to node's require & automatically compiles files on the fly
+// All subsequent files required by node with the extensions .es6, .es, .jsx and .js will be transformed by Babel
+// https://github.com/thejameskyle/babel-handbook/blob/master/translations/en/user-handbook.md
 
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 // equal to your Webpack configuration "context" parameter
 const projectBasePath = require('path').resolve(__dirname, './');
 
-// babel-register: a require hook. binds itself to node's require & automatically compiles files on the fly
 require('babel-register')({
   plugins: [
     [
@@ -21,8 +20,6 @@ require('babel-register')({
 });
 
 require('babel-polyfill');
-
-// "global.webpackIsomorphicTools" used later in app middleware
 
 if (process.env.NODE_ENV === 'production') {
 
@@ -45,6 +42,3 @@ if (process.env.NODE_ENV === 'production') {
   });
 
 };
-
-
-
