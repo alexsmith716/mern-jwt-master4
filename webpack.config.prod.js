@@ -13,7 +13,7 @@ module.exports = {
   entry: {
     app: [
       'babel-polyfill',
-      'bootstrap-loader',
+      'bootstrap-loader/extractStyles',
       path.join(__dirname, './client/index.js')
     ],
     vendor: [
@@ -57,7 +57,92 @@ module.exports = {
             ]
           }
         }]
+      },
 
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use:[
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 1,
+                sourceMap: true
+              }
+            }, 
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: './postcss.config.js',
+                sourceMap: true,
+              }
+            }
+          ]
+        })
+      },
+
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use:[
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 2,
+                sourceMap: true
+              }
+            }, 
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: './postcss.config.js',
+                sourceMap: true,
+              }
+            }, 
+            {
+              loader: 'sass-loader',
+              query: {
+                outputStyle: 'expanded',
+                sourceMap: true
+              }
+            }
+          ]
+        })
+      },
+
+      {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use:[
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 2,
+                sourceMap: true
+              }
+            }, 
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: './postcss.config.js',
+                sourceMap: true,
+              }
+            }, 
+            {
+              loader: 'less-loader',
+              query: {
+                outputStyle: 'expanded',
+                sourceMap: true
+              }
+            }
+          ]
+        })
       },
 
       {
@@ -115,90 +200,14 @@ module.exports = {
       },
 
       {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use:[
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 2,
-                sourceMap: true
-              }
-            }, 
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: './postcss.config.js',
-                sourceMap: true,
-              }
-            }, 
-            {
-              loader: 'less-loader',
-              query: {
-                outputStyle: 'expanded',
-                sourceMap: true
-              }
-            }
-          ]
-        })
+        test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+        use: [
+          {
+            loader: 'imports-loader?jQuery=jquery'
+          }
+        ]
       },
 
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use:[
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 2,
-                sourceMap: true
-              }
-            }, 
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: './postcss.config.js',
-                sourceMap: true,
-              }
-            }, 
-            {
-              loader: 'sass-loader',
-              query: {
-                outputStyle: 'expanded',
-                sourceMap: true
-              }
-            }
-          ]
-        })
-      },
-
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use:[
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 1,
-                sourceMap: true
-              }
-            }, 
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: './postcss.config.js',
-                sourceMap: true,
-              }
-            }
-          ]
-        })
-      },
     ]
   },
 

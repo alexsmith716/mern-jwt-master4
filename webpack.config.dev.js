@@ -72,6 +72,97 @@ module.exports = {
       },
 
       {
+        test: /\.css$/,
+        use:[
+          {
+            loader: 'style-loader',
+            options: { sourceMap: true }
+          }, 
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              sourceMap: true,
+              localIdentName: '[name]_[local]_[hash:base64:5]'
+            }
+          }, 
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: './postcss.config.js',
+              sourceMap: true,
+            }
+          }
+        ],
+      },
+
+      {
+        test: /\.scss$/,
+        use:[
+          {
+            loader: 'style-loader',
+            options: { sourceMap: true }
+          }, 
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2,
+              sourceMap: true,
+              localIdentName: '[name]_[local]_[hash:base64:5]'
+            }
+          }, 
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: './postcss.config.js',
+              sourceMap: true,
+            }
+          }, 
+          {
+            loader: 'sass-loader',
+            options: {
+              outputStyle: 'expanded',
+              sourceMap: true
+            }
+          }
+        ],
+      },
+
+      {
+        test: /\.less$/,
+        use:[
+          { loader: 'style-loader',
+            options: { sourceMap: true }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2,
+              sourceMap: true,
+              localIdentName: '[name]_[local]_[hash:base64:5]'
+            }
+          }, 
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: './postcss.config.js',
+              sourceMap: true,
+            }
+          }, 
+          {
+            loader: 'less-loader',
+            query: {
+              outputStyle: 'expanded',
+              sourceMap: true
+            }
+          }
+        ],
+      },
+
+      {
         test: /\.(woff|woff2)?(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
@@ -126,94 +217,12 @@ module.exports = {
       },
 
       {
-        test: /\.less$/,
-        use:[
-          { loader: 'style-loader',
-            options: { sourceMap: true }
-          },
+        test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+        use: [
           {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              sourceMap: true,
-              localIdentName: '[name]_[local]_[hash:base64:5]'
-            }
-          }, 
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './postcss.config.js',
-              sourceMap: true,
-            }
-          }, 
-          {
-            loader: 'less-loader',
-            query: {
-              outputStyle: 'expanded',
-              sourceMap: true
-            }
+            loader: 'imports-loader?jQuery=jquery'
           }
-        ],
-      },
-
-      {
-        test: /\.scss$/,
-        use:[
-          {
-            loader: 'style-loader',
-            options: { sourceMap: true }
-          }, 
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              sourceMap: true,
-              localIdentName: '[name]_[local]_[hash:base64:5]'
-            }
-          }, 
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './postcss.config.js',
-              sourceMap: true,
-            }
-          }, 
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: 'expanded',
-              sourceMap: true
-            }
-          }
-        ],
-      },
-
-      {
-        test: /\.css$/,
-        use:[
-          {
-            loader: 'style-loader',
-            options: { sourceMap: true }
-          }, 
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              sourceMap: true,
-              localIdentName: '[name]_[local]_[hash:base64:5]'
-            }
-          }, 
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './postcss.config.js',
-              sourceMap: true,
-            }
-          }
-        ],
+        ]
       },
 
     ]
