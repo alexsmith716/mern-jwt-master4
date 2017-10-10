@@ -185,7 +185,7 @@ module.exports = {
               loader: 'css-loader',
               options: {
                 modules: true,
-                importLoaders: 2,
+                importLoaders: 1,
                 sourceMap: true
               }
             }, 

@@ -4,6 +4,7 @@
 // https://webpack.js.org/loaders
 // https://github.com/webpack-contrib/css-loader
 // https://javascriptplayground.com/blog/2016/07/css-modules-webpack-react/
+// https://webpack.js.org/concepts/module-resolution/
 
 let cssModulesIdentName = '[name]__[local]__[hash:base64:5]';
 // defines structure of what generated CSS class should be, maps to generated output
