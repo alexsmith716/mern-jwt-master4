@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 
   .server(projectBasePath, () => {
 
-    require('./dist/server.bundle');
+    require('./build/server/server.bundle');
 
   });
 
