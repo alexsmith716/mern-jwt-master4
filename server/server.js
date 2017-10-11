@@ -30,11 +30,10 @@ if (process.env.NODE_ENV === 'development') {
   // serve files emitted from webpack over a connect server
   // noInfo: warnings and errors to console
   // publicPath: path to bind the middleware to (same as used in webpack)
-  app.use(webpackDevMiddleware(compiler,
-    {
+  app.use(webpackDevMiddleware(compiler, {
       noInfo: false, 
       publicPath: webpackConfigDev.output.publicPath 
-    }
+    },
   ));
 
   app.use(webpackHotMiddleware(compiler));
