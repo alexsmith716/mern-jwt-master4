@@ -1,6 +1,14 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+
+import css from './app.scss';
+
+console.log('>>>> client > INDEX.js <<<<');
+
+console.log('>>>> client > INDEX.js <<<< CSS: ', css);
+
+/*
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';;
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -31,14 +39,9 @@ if (module.hot) {
   });
 }
 
-// <Router history={history}>
-
-if (token) {
-  store.dispatch({ type: AUTH_USER });
-}
-
 console.log('>>>> client > INDEX.js <<<< module.hot', module.hot);
 console.log('>>>> client > INDEX.js <<<< store', store);
 console.log('>>>> client > INDEX.js <<<< token', token);
 console.log('>>>> client > INDEX.js <<<< Router', Router);
 console.log('>>>> client > INDEX.js <<<< mountApp', mountApp);
+*/

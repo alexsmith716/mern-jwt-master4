@@ -7,13 +7,26 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const webpackIsomorphicToolsConfig = require('./webpack.config.tools');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
+
+console.log('>>>>>> webpack.config.prod <<<<<<<<');
+console.log('>>>> bootstrap-loader configuration: ', `${bootstrapEntryPoints.prod}`);
+
+// Bootstrap 4 (requires tether entry point):
+//  (module.exports > entry > app)
+//  'tether', 
+
+
+// Bootstrap 4 (to serve jQuery for js scripts)
+//  (module.exports > module > rules > test)
+//  test: /bootstrap[\/\\]dist[\/\\]js[\/\\]umd[\/\\]/,
 
 module.exports = {
 
   entry: {
     app: [
       'babel-polyfill',
-      'bootstrap-loader/extractStyles',
+      bootstrapEntryPoints.prod,
       path.join(__dirname, './client/index.js')
     ],
     vendor: [
@@ -74,10 +87,6 @@ module.exports = {
             }, 
             {
               loader: 'postcss-loader',
-              options: {
-                config: './postcss.config.js',
-                sourceMap: true,
-              }
             }
           ]
         })
@@ -98,17 +107,9 @@ module.exports = {
             }, 
             {
               loader: 'postcss-loader',
-              options: {
-                config: './postcss.config.js',
-                sourceMap: true,
-              }
             }, 
             {
               loader: 'sass-loader',
-              query: {
-                outputStyle: 'expanded',
-                sourceMap: true
-              }
             }
           ]
         })
@@ -129,17 +130,9 @@ module.exports = {
             }, 
             {
               loader: 'postcss-loader',
-              options: {
-                config: './postcss.config.js',
-                sourceMap: true,
-              }
             }, 
             {
               loader: 'less-loader',
-              query: {
-                outputStyle: 'expanded',
-                sourceMap: true
-              }
             }
           ]
         })
@@ -150,7 +143,7 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            options: { limit: 10000, mimetype: 'application/font-woff' }
+            options: { limit: 20000, mimetype: 'application/font-woff' }
           }
         ]
       },
@@ -247,6 +240,11 @@ module.exports = {
       allChunks: true
     }),
 
+    // Bootstrap 4 requires Tether:
+    // new webpack.ProvidePlugin({
+    //  'window.Tether': 'tether',
+    //}),
+
     // plugin for generating asset manifests
     // defaults to 'manifest.json'
     new ManifestPlugin({
@@ -269,6 +267,7 @@ module.exports = {
     //    staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     //}),
 
+    // i want to review non-uglified output
     //new webpack.optimize.UglifyJsPlugin({
     //  compressor: {
     //    warnings: false,

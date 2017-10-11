@@ -13,8 +13,10 @@ const path = require('path');
 const webpackIsomorphicToolsConfig = require('./webpack.config.tools');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const bootstrapEntryPoints = require('./webpack.bootstrap.config');
 
-console.log('>>>>>> webpack.config.dev <<<<<<<<')
+console.log('>>>>>> webpack.config.dev <<<<<<<<');
+console.log('>>>> bootstrap-loader configuration: ', `${bootstrapEntryPoints.dev}`);
 
 module.exports = {
 
@@ -24,7 +26,7 @@ module.exports = {
       'webpack/hot/only-dev-server',
       'react-hot-loader/patch',
       'babel-polyfill',
-      'bootstrap-loader',
+      bootstrapEntryPoints.dev,
       path.join(__dirname, './client/index.js')
     ],
     vendor: [
@@ -76,7 +78,6 @@ module.exports = {
         use:[
           {
             loader: 'style-loader',
-            options: { sourceMap: true }
           }, 
           {
             loader: 'css-loader',
@@ -89,10 +90,6 @@ module.exports = {
           }, 
           {
             loader: 'postcss-loader',
-            options: {
-              config: './postcss.config.js',
-              sourceMap: true,
-            }
           }
         ],
       },
@@ -102,7 +99,6 @@ module.exports = {
         use:[
           {
             loader: 'style-loader',
-            options: { sourceMap: true }
           }, 
           {
             loader: 'css-loader',
@@ -115,17 +111,9 @@ module.exports = {
           }, 
           {
             loader: 'postcss-loader',
-            options: {
-              config: './postcss.config.js',
-              sourceMap: true,
-            }
           }, 
           {
             loader: 'sass-loader',
-            options: {
-              outputStyle: 'expanded',
-              sourceMap: true
-            }
           }
         ],
       },
@@ -134,7 +122,6 @@ module.exports = {
         test: /\.less$/,
         use:[
           { loader: 'style-loader',
-            options: { sourceMap: true }
           },
           {
             loader: 'css-loader',
@@ -147,17 +134,9 @@ module.exports = {
           }, 
           {
             loader: 'postcss-loader',
-            options: {
-              config: './postcss.config.js',
-              sourceMap: true,
-            }
           }, 
           {
             loader: 'less-loader',
-            query: {
-              outputStyle: 'expanded',
-              sourceMap: true
-            }
           }
         ],
       },
@@ -250,6 +229,11 @@ module.exports = {
         CLIENT: JSON.stringify(true),
         NODE_ENV: JSON.stringify('development'),
       }
+    }),
+
+    // if used, Bootstrap 4 requires Tether
+    new webpack.ProvidePlugin({
+      'window.Tether': 'tether',
     }),
 
     new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig).development(),
