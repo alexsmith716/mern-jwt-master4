@@ -90,6 +90,13 @@ module.exports = {
           }, 
           {
             loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('autoprefixer')({
+                  browsers: ['last 2 versions', 'IE >= 9', 'safari >= 8'],
+                }),
+              ],
+            },
           }
         ],
       },
@@ -111,6 +118,13 @@ module.exports = {
           }, 
           {
             loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('autoprefixer')({
+                  browsers: ['last 2 versions', 'IE >= 9', 'safari >= 8'],
+                }),
+              ],
+            },
           }, 
           {
             loader: 'sass-loader',
@@ -134,6 +148,13 @@ module.exports = {
           }, 
           {
             loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('autoprefixer')({
+                  browsers: ['last 2 versions', 'IE >= 9', 'safari >= 8'],
+                }),
+              ],
+            },
           }, 
           {
             loader: 'less-loader',
@@ -194,16 +215,6 @@ module.exports = {
           { loader: 'json-loader' }
         ]
       },
-
-      {
-        test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
-        use: [
-          {
-            loader: 'imports-loader?jQuery=jquery'
-          }
-        ]
-      },
-
     ]
   },
 
@@ -228,13 +239,17 @@ module.exports = {
       'process.env': {
         CLIENT: JSON.stringify(true),
         NODE_ENV: JSON.stringify('development'),
-      }
+        PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
+      },
+      __CLIENT__: true,
+      __SERVER__: false,
+      __DEVELOPMENT__: true
     }),
 
-    // if used, Bootstrap 4 requires Tether
-    new webpack.ProvidePlugin({
-      'window.Tether': 'tether',
-    }),
+    // Bootstrap 4 requires Tether:
+    // new webpack.ProvidePlugin({
+    //  'window.Tether': 'tether',
+    //}),
 
     new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig).development(),
 
@@ -247,3 +262,13 @@ module.exports = {
     })
   ]
 };
+
+// reqiured for jquery:
+//{
+//  test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+//  use: [
+//    {
+//      loader: 'imports-loader?jQuery=jquery'
+//    }
+//  ]
+//},

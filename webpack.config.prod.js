@@ -87,6 +87,13 @@ module.exports = {
             }, 
             {
               loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  require('autoprefixer')({
+                    browsers: ['last 2 versions', 'IE >= 9', 'safari >= 8'],
+                  }),
+                ],
+              },
             }
           ]
         })
@@ -107,6 +114,13 @@ module.exports = {
             }, 
             {
               loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  require('autoprefixer')({
+                    browsers: ['last 2 versions', 'IE >= 9', 'safari >= 8'],
+                  }),
+                ],
+              },
             }, 
             {
               loader: 'sass-loader',
@@ -130,6 +144,13 @@ module.exports = {
             }, 
             {
               loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  require('autoprefixer')({
+                    browsers: ['last 2 versions', 'IE >= 9', 'safari >= 8'],
+                  }),
+                ],
+              },
             }, 
             {
               loader: 'less-loader',
@@ -191,16 +212,6 @@ module.exports = {
           { loader: 'json-loader' }
         ]
       },
-
-      {
-        test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
-        use: [
-          {
-            loader: 'imports-loader?jQuery=jquery'
-          }
-        ]
-      },
-
     ]
   },
 
@@ -276,3 +287,13 @@ module.exports = {
 
   ]
 };
+
+// reqiured for jquery:
+//{
+//  test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+//  use: [
+//    {
+//      loader: 'imports-loader?jQuery=jquery'
+//    }
+//  ]
+//},

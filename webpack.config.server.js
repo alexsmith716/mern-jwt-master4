@@ -17,6 +17,15 @@ module.exports = {
     publicPath: '/build/server/'
   },
 
+  target: 'node',
+
+  node: {
+    __dirname: true,
+    __filename: true,
+  },
+
+  externals: [ nodeExternals({ importType: 'commonjs' }) ],
+
   module: {
 
     rules: [
@@ -34,6 +43,7 @@ module.exports = {
             ],
             plugins: [
               [
+                'transform-decorators-legacy',
                 'babel-plugin-webpack-loaders', {
                   config: './webpack.config.babel.js',
                   verbose: false,
@@ -55,12 +65,4 @@ module.exports = {
     ]
   },
 
-  target: 'node',
-
-  externals: [ nodeExternals({ importType: 'commonjs' }) ],
-
-  node: {
-    __dirname: true,
-    __filename: true,
-  }
 };
