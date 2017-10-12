@@ -6,7 +6,7 @@ import css from './app.scss';
 
 console.log('>>>> client > INDEX.js <<<<');
 
-console.log('>>>> client > INDEX.js <<<< CSS: ', css);
+console.log('>>>> client > INDEX.js <<<< CSS!!!!!!!: ', css);
 
 /*
 import { AppContainer } from 'react-hot-loader';

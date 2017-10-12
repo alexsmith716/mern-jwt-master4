@@ -23,6 +23,77 @@ const app = express();
 // https://github.com/webpack/webpack-dev-middleware
 // https://github.com/glenjamin/webpack-hot-middleware
 
+console.log('>>>> server.dev > webpackConfigDev <<<<: ', webpackConfigDev);
+
+/*
+{ entry: 
+   { app: 
+      [ 'webpack-hot-middleware/client',
+        'webpack/hot/only-dev-server',
+        'react-hot-loader/patch',
+        'babel-polyfill',
+        'bootstrap-loader',
+        '/Users/robertsnith/Documents/PDFs5/mern-jwt-master4/client/index.js' ],
+     vendor: 
+      [ 'axios',
+        'react',
+        'react-bootstrap',
+        'react-dom',
+        'react-helmet',
+        'react-hot-loader',
+        'react-redux',
+        'react-router',
+        'react-router-bootstrap',
+        'react-router-config',
+        'react-router-dom',
+        'redux',
+        'redux-form',
+        'redux-thunk' ] },
+  output: 
+   { path: '/Users/robertsnith/Documents/PDFs5/mern-jwt-master4/dist',
+     filename: '[name].[chunkhash].js',
+     chunkFilename: '[name].[chunkhash].js',
+     publicPath: '/' },
+  module: 
+   { rules: 
+      [ [Object],
+        [Object],
+        [Object],
+        [Object],
+        [Object],
+        [Object],
+        [Object],
+        [Object],
+        [Object],
+        [Object],
+        [Object] ] },
+  resolve: { extensions: [ '.js', '.jsx', '.css' ] },
+  devtool: 'inline-source-map',
+  plugins: 
+   [ HotModuleReplacementPlugin {
+       options: {},
+       multiStep: undefined,
+       fullBuildTimeout: 200,
+       requestTimeout: 10000 },
+     CommonsChunkPlugin {
+       chunkNames: [Array],
+       filenameTemplate: '[name].[hash].js',
+       minChunks: Infinity,
+       selectedChunks: undefined,
+       children: undefined,
+       async: undefined,
+       minSize: undefined,
+       ident: '/Users/robertsnith/Documents/PDFs5/mern-jwt-master4/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js0' },
+     DefinePlugin { definitions: [Object] },
+     ProvidePlugin { definitions: [Object] },
+     Webpack_isomorphic_tools_plugin {
+       options: [Object],
+       log: [Object],
+       regular_expressions: [Object] },
+     BundleAnalyzerPlugin { opts: [Object], server: null, logger: [Object] } ] 
+}
+*/
+
 if (process.env.NODE_ENV === 'development') {
 
   const compiler = webpack(webpackConfigDev);
@@ -139,7 +210,7 @@ if (app.get('env') === 'development') {
 
     } else {
       console.log('>>>> APP UNCAUGHT ERR HANDLER DEVELOPMENT > NO XHR <<<<');
-      res.send('>>>> APP UNCAUGHT ERR HANDLER DEVELOPMENT > NO XHR <<<<: ', err);
+      res.status('>>>> APP UNCAUGHT ERR HANDLER DEVELOPMENT > NO XHR <<<<: ').send(err);
     }
   });
 };
